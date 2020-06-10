@@ -1,0 +1,243 @@
+<div class="card card-dark">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">
+                    {{status}}
+                </h3>
+            </div>
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Vendor Name: <span class="imp">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-container">
+                                        <i class="fa fa-truck iicon" aria-hidden="true"></i>
+                                        {{form.name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label for="id_is_available">Is available:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    {{form.is_available}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Contact: </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-container">
+                                        <span class="iicon dropdwn">+92</span>
+                                        <!-- <i class="fa fa-address-book iicon" aria-hidden="true"></i> -->
+                                        {{form.contact}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="id_location">Address: </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{form.address}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="id_location">City: </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{form.city}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="id_location">State: </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{form.state}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="id_location">Country: </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{form.country}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label for="">Description:</label>
+                                    {{form.description}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if obj %}
+            <input type="hidden" id='city' value="{{obj.city}}" />
+            <input type="hidden" id='state' value="{{obj.state}}" />
+            {% else %}
+            <input type="hidden" id='city' value="" />
+            <input type="hidden" id='state' value="" />
+            {% endif %}
+
+            <hr><br>
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label> Vendor Items</label>
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <select class="form-control select2 items" data-placeholder="Select an Item"
+                                style="width: 100%;">
+                                <option value="" selected disabled>Select an Item</option>
+                                {% for item in items %}
+                                <option value="{{item.id}}">{{item.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div type="button" id="add_item"
+                            class="col-sm-2 btn bg-gradient-success d-flex justify-content-center mybox mybox2"
+                            title="Add another Item">
+                            <i class="fa fa-plus"></i>
+                            &nbsp;&nbsp;
+                            <b>ADD</b>
+                        </div>
+                        <div type="button" id="view_item"
+                            class="col-sm-2 btn bg-gradient-dark d-flex justify-content-center mybox mybox1"
+                            title="View Item">
+                            <i class="fa fa-eye"></i>
+                            &nbsp;&nbsp;
+                            <b>VIEW</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm">
+                    <table id="example3" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Item ID
+                                </th>
+                                <th>Item Name
+                                </th>
+                                <th>Item Status
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="items_container">
+                            {% for obj in vendor_items %}
+                            <tr>
+                                <td>{{obj.item.id}}</td>
+                                <td>{{obj.item.name}}</td>
+                                <td><input type="checkbox" name="is_available{{forloop.counter}}"
+                                    {% if obj.is_available %}
+                                        checked
+                                    {% endif %}
+                                    ></td>
+                                <td style="text-align: center;">
+                                    <a type="button" onclick=view_item({{obj.item.id}})> 
+                                        <i class="fa fa-eye"></i> 
+                                    </a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a type="button" onclick=delete_item({{obj.item.id}})>
+                                        <i class="fa fa-trash"></i> 
+                                    </a> 
+                                </td> 
+                                <input type="hidden" name="item{{forloop.counter}}" value="{{obj.item.id}}" /> 
+                            </tr>
+                            {% endfor %}
+                            <input type="hidden" name="items_count" 
+                            {% if len %}
+                            value="{{len}}"
+                            {% else %}
+                            value="0"
+                            {%endif%}
+                            >
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding:1%;">
+            <div class="col-sm-6">
+                <button type="submit" class="save btn btn-primary">SAVE</button>
+            </div>
+            <div class="col-sm-6">
+                <a href="{% url 'vendor_list' %}" class="save btn btn-primary">
+                    CANCEL
+                </a>
+            </div>
+        </div>
+        <div class="card-footer">
+            <br>
+        </div>
+    </form>
+</div>

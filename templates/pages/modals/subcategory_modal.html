@@ -1,0 +1,61 @@
+<!-- subcategory modal -->
+<div class="modal fade" id="subcategory_modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h4 class="modal-title">Add Subcategory</h4>
+                <button style="color:white;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="addSubcategory" method="POST" action="{% url 'subcategory_new' %}" class="form-ajax">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <label>Subcategory Name: <span class="imp">*</span></label>
+                            <div class="input-container">
+                                <i class="fa fa-th iicon"></i>
+                                <input type="text" name="name" class="input-field imp-field" required="" id="id_name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <label>Category: <span class="imp">*</span></label>
+                            <select name="category" id='' class="form-control select2 imp-field categories" data-placeholder="Select a Category"
+                                style="width: 100%;">
+                                <option value="" selected disabled>Select a Category</option>
+                                {% if categories %}
+                                {% for obj in categories %}
+                                    <option value="{{obj.id}}">{{obj.name}}</option>
+                                {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm">
+                            <label for="id_name">Description: </label>
+                            <textarea name="description" rows="5" style="width: 100%;padding:1%;" style="height: auto;"></textarea>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="id_name">is_available: </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="checkbox" name="is_available" checked/>
+                        </div>
+                    </div>
+                    <input type="hidden" name="modal" />
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

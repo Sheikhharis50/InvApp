@@ -1,0 +1,155 @@
+<div class="card card-dark">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">
+                    {{status}}
+                </h3>
+            </div>
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg-2">
+                                    <!-- <label>Customer Username: </label> -->
+                                    <label>Customer: <span class="imp">*</span></label>
+                                </div>
+                                <div class="col-sm-8 col-md-8 col-lg-10">
+                                    <!-- {{user.get_username | upper}} -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- <input type="hidden" name="customer" value="{{user.get_username}}" /> -->
+                                {{form.customer}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label for="">Description:</label>
+                                    {{form.description}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr><br>
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label> Demand Items</label>
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="row form-group">
+                        <div class="col-sm-4 col-md-4 col-lg-2" >
+                            <input type="number" class="input-field stock" style="height:38px" placeholder="Stock" value="" />
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg">
+                            <select class="form-control select2 items" data-placeholder="Select an Item"
+                                style="width: 100%;">
+                                <option value="" selected disabled>Select an Item</option>
+                                {% for item in items %}
+                                <option value="{{item.id}}">{{item.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div type="button" id="add_item"
+                            class="col-sm-2 btn bg-gradient-success d-flex justify-content-center mybox mybox2"
+                            title="Add another Item">
+                            <i class="fa fa-plus"></i>
+                            &nbsp;&nbsp;
+                            <b>ADD</b>
+                        </div>
+                        <div type="button" id="view_item"
+                            class="col-sm-2 btn bg-gradient-dark d-flex justify-content-center mybox mybox1"
+                            title="View Item">
+                            <i class="fa fa-eye"></i>
+                            &nbsp;&nbsp;
+                            <b>VIEW</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm">
+                    <table id="example3" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th> Serial
+                                </th>
+                                <th> Name
+                                </th>
+                                <th> Stock
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="items_container">
+                            {% for obj in demand_items %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{obj.item.name}}</td>
+                                <td>
+                                    <span>{{obj.stock}}</span>
+                                    <input type="hidden" id="stock" value="{{obj.stock}}" name="stock{{forloop.counter}}" />
+                                </td>
+                                <td style="text-align: center;">
+                                    <a type="button" onclick=view_item({{obj.item.id}})> 
+                                        <i class="fa fa-eye"></i> 
+                                    </a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a type="button" onclick=delete_item({{obj.item.id}})>
+                                        <i class="fa fa-trash"></i> 
+                                    </a> 
+                                </td> 
+                                <input type="hidden" name="item{{forloop.counter}}" value="{{obj.item.id}}" /> 
+                            </tr>
+                            {% endfor %}
+                            <input type="hidden" name="items_count" 
+                            {% if len %}
+                            value="{{len}}"
+                            {% else %}
+                            value="0"
+                            {%endif%}
+                            >
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding:1%;">
+            <div class="col-sm-6">
+                <button type="submit" class="save btn btn-primary">SAVE</button>
+            </div>
+            <div class="col-sm-6">
+                <a href="{% url 'demand_list' %}" class="save btn btn-primary">
+                    CANCEL
+                </a>
+            </div>
+        </div>
+        <div class="card-footer">
+            <br>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,51 @@
+<div class="modal fade" id="department_modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h4 class="modal-title">Add Department</h4>
+                <button style="color:white;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="addDepartment" method="POST" action="{% url 'department_new' %}" class="form-ajax">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="row form-group">
+                                <div class="col-sm">
+                                    <label>Department Name: <span class="imp">*</span></label>
+                                    <div class="input-container">
+                                        <i class="fa fa-building iicon"></i>
+                                        <input type="text" name="name" class="input-field imp-field">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm">
+                                    <label for="id_location">Contact:</label>
+                                    <div class="input-container">
+                                        <span class="iicon dropdwn">+92</span>
+                                        <!-- <i class="fa fa-address-book iicon" aria-hidden="true"></i> -->
+                                        <input type="text" name="contact" class="input-field imp-field">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm">
+                                    <label for="id_name">Description: </label>
+                                    <textarea name="description" style="width: 100%; border: 1px solid #cccccc;" rows=5></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="modal" />
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

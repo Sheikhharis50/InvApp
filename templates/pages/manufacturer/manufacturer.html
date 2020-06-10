@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<title>Manufacturers {{page_name}} | Inventory App</title>
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-5">
+                    <h1 class="m-0 text-dark">
+                        Manufacturers
+                    </h1>
+                </div>
+                <div class="col-sm-2">
+                    {% include 'partials/_alerts.html' %}
+
+                </div>
+                <div class="col-sm-5">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Dashboard</a></li>
+                        {%if not list%}
+                        <li class="breadcrumb-item"><a href="{% url 'manufacturer_list' %}">Manufacturers List</a></li>
+                        {%endif%}
+                        <li class="breadcrumb-item">{{status}}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-12">
+
+                {% if status == 'Add Manufacturer' %}
+                {% include 'pages/manufacturer/manufacturer_new.html' %}
+                {%endif%}
+                {% if status == 'Update Manufacturer' %}
+                {% include 'pages/manufacturer/manufacturer_new.html' %}
+                {%endif%}
+                {% if status == 'Manufacturer Detail' %}
+                {% include 'pages/manufacturer/manufacturer_details.html' %}
+                {%endif%}
+                {% if status == 'Manufacturers List' %}
+                {% include 'pages/manufacturer/manufacturer_list.html' %}
+                {%endif%}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

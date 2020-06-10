@@ -1,0 +1,117 @@
+<!-- category modal -->
+<div class="modal fade" id="warehouse_modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h4 class="modal-title">Add Warehouse</h4>
+                <button style="color:white;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="addWarehouse" method="POST" action="{% url 'warehouse_new' %}" class="form-ajax">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="row form-group">
+                                <div class="col-sm">
+                                    <label>Warehouse Name: <span class="imp">*</span></label>
+                                    <div class="input-container">
+                                        <!-- <i class="fa fa-cart-plus iicon"></i> -->
+                                        <i class="fa fa-home iicon"></i>
+                                        <input type="text" name="name" class="input-field imp-field">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="id_location">Address: </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="text" name="address" class="input-field">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="id_location">City: </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <select name="city" class="form-control select2" data-placeholder="Select a City"
+                                                style="width: 100%;">
+                                                <option value="" selected disabled>Select a City</option>
+                                                {% for obj in cities %}
+                                                <option value="{{obj.0}}">{{obj.0}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="id_location">State: </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <select name="state" class="form-control select2" data-placeholder="Select a State" style="width: 100%;">
+                                                <option value="" selected disabled>Select a State</option>
+                                                {% for obj in states %}
+                                                <option value="{{obj.0}}">{{obj.0}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="id_location">Country: </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <select name="country" class="form-control select2" data-placeholder="Select a Country" style="width: 100%;">
+                                                <!-- <option value="" selected disabled>Select a Country</option> -->
+                                                {% for obj in countries %}
+                                                {% if obj.0 == 'Pakistan' %}
+                                                <option value="{{obj.0}}" selected='selected'>{{obj.0}}</option>
+                                                {%else%}
+                                                <option value="{{obj.0}}">{{obj.0}}</option>
+                                                {%endif%}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                                    <label for="id_name">is_available: </label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="checkbox" name="is_available" checked/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="modal" />
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

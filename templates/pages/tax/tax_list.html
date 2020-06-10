@@ -1,0 +1,54 @@
+<div class="card card-dark">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">
+                    {{status}}
+                </h3>
+            </div>
+            <div class="col-md-6">
+                <a type="button" class="btn bg-gradient-success btn-md float-right" href="{% url 'tax_new' %}"
+                    style="color: white;" title="Add another Tax">
+                    <i class="fa fa-plus"></i>
+                    &nbsp; Add
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="example1"  class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Serial</th>
+                    <th>Name</th>
+                    <th>Percentage</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="list_body">
+                {% if data %}
+                {% for obj in data %}
+                <tr>
+                    <td>{{forloop.counter}}}</td>
+                    <td>
+                        <a href="{% url 'tax_detail' obj.id %}">{{obj.name}}</a>
+                    </td>
+                    <td>
+                        {{obj.percentage}}
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'tax_update' obj.id %}">
+                            <i class="fa fa-edit" style="color:#efb80b;"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="{% url 'tax_delete' obj.id %}">
+                            <i class="fa fa-trash" style="color: rgb(216, 26, 26);"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="card card-dark">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">
+                    {{status}}
+                    &nbsp;
+                    <i class="fas fa-info-circle" id="info" aria-label="Fields are not editable!"></i>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm">
+                <div class="row form-group">
+                    <label>Department Name: </label>
+                    <div class="input-container">
+                        <i class="fa fa-building iicon" aria-hidden="true"></i>
+                        <input type="text" name="name" value="{{ obj.name }}" readonly class="input-field" required=""
+                            id="id_name">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="row form-group">
+                    <label>Contact: </label>
+                    <div class="input-container">
+                        <i class="fa fa-address-book iicon" aria-hidden="true"></i>
+                        <input type="text" name="name" value="{{ obj.contact }}" readonly class="input-field" required=""
+                                id="id_name">
+                    </div>
+                </div>
+            </div>
+        </div><div class="row">
+            <div class="col-sm">
+                <div class="row form-group">
+                    <label>Description: </label>
+                    <textarea readonly rows=5 class="input-field">{{obj.description}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:1%;">
+        <div class="col-sm">
+            <button type="reset" class="save btn btn-primary" onclick="goBack()">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;
+                Go Back
+            </button>
+        </div>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </div>
+</div>

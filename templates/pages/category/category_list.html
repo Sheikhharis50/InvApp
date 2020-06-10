@@ -1,0 +1,77 @@
+<!-- <style>
+    #delCategory {
+        display: inline;
+        margin: 0;
+        padding: 0;
+    }
+    .submit {
+        border-color: transparent;
+        background-color: transparent;
+    }
+    .url {
+        display: none;
+    }
+</style> -->
+<div class="card card-dark">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">
+                    {{status}}
+                </h3>
+            </div>
+            <div class="col-md-6">
+                <a type="button" class="btn bg-gradient-success btn-md float-right" href="{% url 'category_new' %}"
+                    style="color: white;" title="Add another Category">
+                    <i class="fa fa-plus"></i>
+                    &nbsp; Add
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Serial
+                    </th>
+                    <th>Name
+                    </th>
+                    <th>Status
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="list_body">
+                {% if data %}
+                {% for cat in data %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                        <a href="{% url 'category_detail' cat.id %}">{{cat.name}}</a>
+                    </td>
+                    <td>
+                            {% if cat.is_available is True %}
+                            Available
+                            {% else %}
+                            N/A
+                            {% endif %}
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'category_update' cat.id %}">
+                            <i class="fa fa-edit" style="color:#efb80b;"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="{% url 'category_delete' cat.id %}">
+                            <i class="fa fa-trash" style="color: rgb(216, 26, 26);"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

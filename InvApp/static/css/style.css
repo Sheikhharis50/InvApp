@@ -1,0 +1,259 @@
+.logo {
+  width: 80px; 
+}
+.footer-copyright a{
+  color: #fff;
+  font-weight: bold;
+}
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.mybox {
+border: 1px solid #ced4da;
+border-radius: 4%;
+max-height: 38px;
+}
+
+.mybox .fa-eye,
+.mybox .fa-plus {
+padding-top: 4px;
+}
+
+.items_container .fa-trash {
+color: rgb(216, 26, 26);
+}
+
+.items_container .fa-eye {
+color: #3b87fd;
+}
+.paginate_button.page-item.active .page-link{
+  color: white !important;
+  background-color: #343a40 !important;
+  border-color: #343a40;
+}
+#info:hover ,#info1:hover {
+  position: relative;
+}
+#info[aria-label]:hover:after, #info1[aria-label]:hover:after {
+  content: attr(aria-label);
+  padding: 0px 8px;
+  position: absolute;
+  font-style: italic;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+  color: rgb(219, 217, 217);
+  left: 100%;
+  top: 5%; 
+  white-space: nowrap;
+  z-index: 20px;
+}
+#info1[aria-label]:hover:after{
+  color: #027cff;
+}
+.iicon {
+  padding: 18px;
+  background: #343a40;
+  color: white;
+  text-align: center;
+  max-width: 54px;
+  min-width: 54px;
+}
+.dropdwn{
+  padding-left: 0%;
+  padding-right: 0%;
+  text-align: center;
+}
+
+.mybtn{
+  background-color: #343a40;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 23%;
+}
+.mybtn:hover {
+  background-color: #58595a;
+}
+.img_con{
+  /* position: relative;*/
+  width: 100%;
+  max-width: 280px !important;  
+}
+.img_con img{
+  max-width: 80% !important;
+  height: auto;
+}
+
+.imp{
+  color: #e54744;
+}
+.input-field {
+  width: 100%;
+  padding: 1%;
+  outline: none;
+  height: auto;
+}
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}
+.heading{
+  font-weight: bold;
+  padding: 1%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  text-align: center;
+}
+.pager{
+  margin: 0 auto;
+  width: 80%;
+}
+#temp_img{
+  cursor: pointer;
+}
+.cropped {
+  object-fit: cover;
+  object-position: -40px 0px; 
+}
+.fields{
+  width: 100%;
+  padding: 0.5%;
+}
+.addd{
+  margin-top: 8px;
+  margin-right: 2px;
+  font-size: small;
+  color: #2aa746;
+}
+.save{
+  margin: 0 auto;
+  width: 90%;
+  margin: 5%;
+  margin-top: 2%;
+  background-color: #343a40 !important;
+  border-color: #343a40 !important;
+  color: white !important;
+}
+.save:hover{
+  background-color: #2d426d;
+  border-color: #2d426d;
+}
+
+#login{
+  overflow: auto;
+}
+
+html, body{
+  height: 100%;
+}
+
+/* Style the search field */
+form.search input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #e9ecef;
+  border-color: white;
+}
+
+/* Style the submit button */
+form.search button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.search button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+#showcase-inner {
+  background: url('/static/img/building.jpg') no-repeat top center fixed/cover;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px; }
+  #showcase-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    background: rgba(32, 134, 107, 0.8); }
+  #showcase-inner.showcase-search {
+    min-height: 270px; }
+
+.crud{
+    background-color: #e9ecef;
+}
+.add{
+  width: 20px;
+  height: 20px;
+}
+.sub{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+#work {
+  padding: 6rem 0; }
+
+.listing-preview a {
+  position: relative; }
+
+@media (max-width: 991px) {
+  #showcase {
+    padding-top: 4rem; }
+    #showcase h1 {
+      font-size: 40px; }
+  .hide-md-down {
+    display: none; } }
+
+@media (max-width: 768px) {
+  .mybtn{
+    margin: 1%;
+  }
+  #showcase {
+    padding-top: 3rem; }
+    #showcase h1 {
+      font-size: 40px; }
+    #showcase p {
+      display: none; }
+  #top-bar {
+    text-align: center; }
+    #top-bar .social {
+      text-align: center !important; } }
+  
+
+@media (max-width: 576px) {
+  #showcase h1 {
+    font-size: 30px; }
+  #showcase-inner h1 {
+    font-size: 40px; } 
+  .sec{
+    padding-top: 12px;
+  }
+  .mybox {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+

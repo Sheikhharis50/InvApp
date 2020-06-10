@@ -1,0 +1,74 @@
+<div class="card card-dark">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">
+                    {{status}}
+                </h3>
+            </div>
+            <div class="col-md-6">
+                <a type="button" class="btn bg-gradient-success btn-md float-right" href="{% url 'demand_new' %}"
+                    style="color: white;" title="Add another Manufacture">
+                    <i class="fa fa-plus"></i>
+                    &nbsp; Add
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="example1"  class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Serial</th>
+                    <th>Customer</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Date Added</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="list_body">
+                {% if data %}
+                {% for obj in data %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                        <a href="{% url 'demand_detail' obj.id %}">{{obj.customer}}</a>
+                    </td>
+                    <td>
+                        {% if obj.total_price %}
+                            {{obj.total_price}}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if obj.status %}
+                            {{obj.status}}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{obj.date_added}}
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'demand_detail' obj.id %}" type="button">
+                            <i class="fa fa-eye" style="color:#3b87fd;"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="{% url 'demand_update' obj.id %}" type="button">
+                            <i class="fa fa-edit" style="color:#efb80b;"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="{% url 'demand_delete' obj.id %}" type="button">
+                            <i class="fa fa-trash" style="color: rgb(216, 26, 26);"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>

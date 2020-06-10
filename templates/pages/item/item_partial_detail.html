@@ -1,0 +1,550 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Items {{page_name}} | Inventory App</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-dark">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="card-title">
+                                            {{status}}
+                                            &nbsp;<i class="fas fa-info-circle" id="info"
+                                                aria-label="Fields are not editable!"></i>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xs-9 col-sm-6 col-md-6 col-lg-6" style="padding: 1.5%;">
+                                        <div class="row form-group" style="margin-bottom: 0%;">
+                                            <label for="id_name">Item Name:</label>
+                                            <div class="input-container">
+                                                <i class="fa fa-cart-plus iicon"></i>
+                                                <input type="text" name="name" value="{{ obj.name }}" readonly
+                                                    class="input-field" required="" id="id_name">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group" style="padding-bottom: 0%;">
+        
+                                            <label for="id_date_added">
+                                                Expiry Date:
+                                            </label>
+                                            <div class="input-container">
+                                                <i class="fa fa-calendar-check iicon"></i>
+                                                <input value="{{ obj.expiry_date }}" readonly style="width: 100%;" type="text"
+                                                    name="name" class="input-field" required="" id="id_name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <label for="id_name">Item Image:</label>
+                                        <div class="img_con">
+                                            <img {% if status_of_img == 0 %} src="{{ obj.image.url }}" {% else %}
+                                                src="/media/barcodes/None.png" {% endif %} alt="" style="width: 80%;" />
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <hr><br>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-xs-9 col-sm-6 col-md-6 col-lg-6" style="padding: 1.5%;">
+                                        <div class="row form-group" style="margin-bottom: 0%;">
+                                            <label for="id_name">Barcode Number:</label>
+                                            <div class="input-container">
+                                                <i class="fa fa-barcode iicon"></i>
+                                                <input type="text" name="barcode" value="{{ obj.barcode }}" class="input-field"
+                                                    readonly="readonly" required="" id="id_barcode">
+                                                <a download type="button" class="btn bg-gradient-dark btn-md iicon"
+                                                    {% if status_of_barcode == 0 %} href="{{obj.barcodeImage.url}}" {% else %}
+                                                    href="" {% endif %}
+                                                    style="color: white; max-height:52px;padding:10px;margin-right:1%;">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <label for="id_name">Barcode Image:</label>
+                                        <div class="img_con">
+                                            <img src="{{obj.barcodeImage.url}}" class="cropped" alt=""
+                                                style="width: 100%;max-width: 100% !important;" />
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <hr><br>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-sm-6" style="padding-left: 1%;">
+                                        {% if obj.unit %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="id_location">Unit:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.unit }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.stock %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="id_location">Stock:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.stock }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.reorder %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm">
+                                                        <label for="">Reorder Point:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.reorder }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.status %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm">
+                                                        <label for="">Status:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.status }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.returnable %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm">
+                                                        <label for="">Returnable Item</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.returnable }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                    </div>
+        
+                                    <div class="col-sm-6">
+                                        {% if obj.category %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="id_location">Category:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.category }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.subcategory %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="">SubCategory:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.subcategory }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.warehouse %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="">Warehouse:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.warehouse }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.department %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="id_location">Department:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.department }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.brand %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="id_location">Brand:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.brand }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        {% if obj.manufaturer %}
+                                        <div class="row form-group">
+                                            <div class="col-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="id_location">Manufacturer:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="barcode" value="{{ obj.manufaturer }}"
+                                                            class="input-field" readonly="readonly" required="" id="id_barcode">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <hr><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    {% if obj.price or obj.sale_account or obj.sale_desciption or obj.tax %}
+                                    <div class="col-sm-6" style="padding-left: 1%;">
+                                        <div id="accordion" class="myaccordion1">
+                                            <div class="card card-dark">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                                    style="background-color: #343a40; color: white;">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title">
+                                                            Sales Information
+                                                        </h4>
+                                                        <i class="fa fa-plus" id='collps_icon1'
+                                                            style="float: right;padding-top:1%"></i>
+                                                    </div>
+                                                </a>
+                                                <div id="collapseOne" class="panel-collapse collapse in">
+                                                    <div class="card-body">
+                                                        {% if obj.price %}
+                                                        <div class="row form-group">
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="id_name">Price: </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" name="barcode"
+                                                                            value="{{ obj.price }}" class="input-field"
+                                                                            readonly="readonly" required="" id="id_barcode">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {%endif%}
+                                                        {% if obj.sale_account %}
+                                                        <div class="row form-group">
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="id_name">Account: <span
+                                                                                class="imp"></span></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" name="barcode"
+                                                                            value="{{ obj.sale_account }}" class="input-field"
+                                                                            readonly="readonly" required="" id="id_barcode">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {%endif%}
+                                                        {% if obj.sale_desciption %}
+                                                        <div class="row form-group">
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="id_name">Description: <span
+                                                                                class="imp"></span></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <textarea name="sale_desciption"
+                                                                            style="width: 100%;"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {%endif%}
+                                                        {% if obj.tax %}
+                                                        <div class="row form-group">
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="id_name">Tax:
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" name="barcode"
+                                                                            value="{{ obj.tax.name }}, {{obj.tax.percentage}}%"
+                                                                            class="input-field" readonly="readonly" required=""
+                                                                            id="id_barcode">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {%endif%}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {%endif%}
+                                    {% if obj.cost or obj.purchase_account or obj.purchase_desciption%}
+                                    <div class="col-sm-6" style="padding-left: 1%;">
+                                        <div id="accordion" class="myaccordion2">
+                                            <div class="card card-dark">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                                                    style="background-color: #343a40; color: white;">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title">
+                                                            Purchase Information
+                                                        </h4>
+                                                        <i class="fa fa-plus" id='collps_icon2'
+                                                            style="float: right;padding-top:1%"></i>
+                                                    </div>
+                                                </a>
+                                                <div id="collapseTwo" class="panel-collapse collapse in">
+                                                    <div class="card-body">
+                                                        {% if obj.cost %}
+                                                        <div class="row form-group">
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-sm">
+                                                                        <label for="id_name">Cost: </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm">
+                                                                        <input type="text" name="barcode" value="{{ obj.cost }}"
+                                                                            class="input-field" readonly="readonly" required=""
+                                                                            id="id_barcode">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {%endif%}
+                                                        {% if obj.purchase_account %}
+                                                        <div class="row form-group">
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="id_name">Account: <span
+                                                                                class="imp"></span></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" name="barcode"
+                                                                            value="{{ obj.purchase_account }}"
+                                                                            class="input-field" readonly="readonly" required=""
+                                                                            id="id_barcode">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {%endif%}
+                                                        {% if obj.purchase_desciption %}
+                                                        <div class="row form-group">
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="id_name">Description: <span
+                                                                                class="imp"></span></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <textarea name="purchase_desciption"
+                                                                            style="width: 100%;">
+                                                                                            {{obj.purchase_desciption}}
+                                                                                        </textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {%endif%}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {%endif%}
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" style="padding:1%;">
+                                        <div class="form-group">
+                                            <label for="id_location">Description:</label>
+                                            <textarea rows="5" readonly style="width: 100%;padding:1%;"
+                                                style="height: auto;">{{ obj.description }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="id_date_added">Date Added:</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="input-container">
+                                                    <i class="fa fa-calendar iicon"></i>
+                                                    <input value="{{ obj.date_added }}" readonly style="width: 100%;"
+                                                        type="text" name="name" class="input-field" required="" id="id_name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="id_date_added">Date Updated:</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="input-container">
+                                                    <i class="fas fa-calendar-check iicon"></i>
+                                                    <input value="{{ obj.date_updated }}" readonly style="width: 100%;"
+                                                        type="text" name="name" class="input-field" required="" id="id_name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <!-- ++++++++++++++++++++++ -->
+    <script src="{% static 'js/adminlte.min.js' %}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{% static 'js/demo.js' %}"></script>
+    <!-- Customized Script File -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
+

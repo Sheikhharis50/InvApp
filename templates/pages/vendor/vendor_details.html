@@ -1,0 +1,121 @@
+
+<div class="card card-dark">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">
+                    {{status}}
+                    &nbsp;
+                    <i class="fas fa-info-circle" id="info" aria-label="Fields are not editable!"></i>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card card-dark card-outline">
+                    <div class="card-body box-profile">
+                        <h2 class="profile-username text-center">
+                            {{ obj.name|upper }}
+                        </h2>
+                        <p class="text-muted text-center">
+                            {% if obj.address %}
+                            {{ obj.address }},
+                            {% endif %}
+                            {% if obj.city %}
+                            {{ obj.city }},
+                            {% endif %}
+                            {% if obj.state %}
+                            {{ obj.state }},
+                            {% endif %}
+                            {% if obj.country %}
+                            {{ obj.country }}
+                            {% endif %}
+                        </p>
+                        <br>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Contact</b> <a class="float-right">{{ obj.contact }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Date Added</b> <a class="float-right">{{obj.date_added}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Description</b>
+                                <br>
+                                <a class="float-right">
+                            {% if obj.description %}
+                                {{obj.description}}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="card-title">
+                                    Vendor Items
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm">
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th> Serial
+                                            </th>
+                                            <th> Name
+                                            </th>
+                                            <th> Status
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="items_container">
+                                        {% for obj in vendor_items %}
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td>{{obj.item.name}}</td>
+                                            <td>
+                                                {% if obj.is_available %}
+                                                Available
+                                                {% else %}
+                                                N/A
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:1%;">
+        <div class="col-sm">
+            <button type="reset" class="save btn btn-primary" onclick="goBack()">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;
+                Go Back
+            </button>
+        </div>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </div>
+</div>

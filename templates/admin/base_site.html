@@ -1,0 +1,17 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+<title>MyWeb | Admin-Panel</title>
+
+
+{% block branding %}
+    <h1 id="head">
+        <!-- Write:  img.brand_img -->
+        <!-- <img src="{% static 'img/logo.png' %}" alt="My Web" height="50" width="80" 
+        class="brand_img">   -->
+        <b>Inventory App:</b> <span id="l1">Admin Area</span>
+    </h1>
+{% endblock %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}
